@@ -29,6 +29,12 @@ stage ('Checkout') {
             }
             
         }
+        stage ('Deploy To Dev'){
+            steps{
+                sh 'java -jar target/docker-spring-boot.jar'
+            }
+            
+        }
 		stage ('Publish Artifacts') {
             steps {
                 sh 'mvn clean deploy -DaltDeploymentRepository=nexus-releases::default::http://nexus:8081/repository/totaldevops_snapshot'
