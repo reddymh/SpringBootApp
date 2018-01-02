@@ -37,7 +37,7 @@ stage ('Checkout') {
         }
 		stage ('Publish Artifacts') {
             steps {
-                sh 'mvn clean deploy -DaltDeploymentRepository=nexus-releases::default::http://nexus:8081/repository/totaldevops_snapshot'
+                sh 'mvn clean deploy -DaltDeploymentRepository=nexus-releases::default::http://nexus:8081/repository/totaldevops_release'
             }
         }
         
