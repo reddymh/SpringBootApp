@@ -31,7 +31,7 @@ stage ('Checkout') {
         }
         stage ('Deploy To Dev'){
             steps{
-                sh 'nohup java -jar target/docker-spring-boot.jar > log.out'
+                sh 'nohup java -jar target/docker-spring-boot.jar > log.out &'
             }
             
         }
