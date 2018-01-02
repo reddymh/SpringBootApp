@@ -5,7 +5,7 @@
 
 	<groupId>com.demo.docker</groupId>
 	<artifactId>demo</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.1-RELEASE</version>
 	<packaging>jar</packaging>
 
 	<name>demo</name>
@@ -63,7 +63,7 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
 		</plugins>
-		<finalName>docker-spring-boot</finalName>
+		<finalName>docker-spring-boot-${project.version}</finalName>
 	</build>
 
 
