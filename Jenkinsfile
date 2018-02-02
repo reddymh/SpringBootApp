@@ -25,7 +25,7 @@ stage ('Checkout') {
         }
         stage ('Sonar'){
             steps{
-                sh 'mvn sonar:sonar -Dsonar.host.url=http://sonar:9000 -Dsonar.login=852d6cd2d9ecb6cc743db64527ad8e7c6579bedf -DaltDeploymentRepository=nexus-releases::default::http://nexus:8081/repository/totaldevops_snapshot'
+                sh 'mvn sonar:sonar -Dsonar.host.url=http://sonar:9000 -Dsonar.login=${SONAR_USER_TOKEN_ID} -DaltDeploymentRepository=nexus-releases::default::http://nexus:8081/repository/totaldevops_snapshot'
             }
             
         }
