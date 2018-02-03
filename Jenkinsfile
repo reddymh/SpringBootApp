@@ -13,7 +13,7 @@ pipeline {
                 ''' 
             }
         }
-stage ('Checkout') {
+        stage ('Checkout') {
             steps {
                checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'GitHub', url: 'https://github.com/reddymh/SpringBootApp.git']]])
             }
@@ -29,17 +29,33 @@ stage ('Checkout') {
             }
             
         }
-        stage ('Deploy To Dev'){
+        stage ('Build Docker Image'){
             steps{
-                sh 'nohup java -jar target/docker-spring-boot.jar > log.out &'
+				echo "######################### Building Docker Image for JavaWebApp #############################"
+                sh 'docker build -t docker_spring_demo:1.0 .'
+				echo "######################### Built Docker Image for JavaWebApp Successfully #############################"
             }
             
         }
-		stage ('Publish Artifacts') {
+		stage ('Publish Docker Image') {
             steps {
-                sh 'mvn clean deploy -DaltDeploymentRepository=nexus-releases::default::http://nexus:8081/repository/totaldevops_snapshot'
+                echo "Publishing Docker Image To Docker Private Registry ( Nexus )"
             }
         }
+		stage ('Deploy Docker Container On Dev Env'){
+            steps{
+				echo " #################### Stopping JavaWebApp Container #######################"
+				sh ' docker stop docker_spring_demo '
+				echo " #################### Stopped JavaWebApp Container ########################"
+				echo " #################### Removing JavaWebApp Container #######################"
+				sh ' docker rm docker_spring_demo '
+				echo " #################### Removed JavaWebApp Container #######################"
+				echo " #################### Starting JavaWebApp Container #######################"
+                sh ' docker run -p 8088:8088 -d --name docker_spring_demo --net=ecosystem -it docker_spring_demo:1.0'
+				echo " #################### Started JavaWebApp Container #######################"
+				echo " #################### JavaWebApp URL : http://<HOSTNAME>:8088/rest/hellodocker #######################"
+            }
+		}
         
     }
 }
