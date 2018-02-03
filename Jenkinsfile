@@ -45,10 +45,10 @@ pipeline {
 		stage ('Deploy Docker Container On Dev Env'){
             steps{
 				echo " #################### Stopping Sprint Boot Docker Container #######################"
-				sh ' docker stop docker_spring_demo ' | true
+				sh ' docker stop docker_spring_demo ' || true
 				echo " #################### Stopped Sprint Boot Docker Container ########################"
 				echo " #################### Removing Sprint Boot Docker Container #######################"
-				sh ' docker rm docker_spring_demo ' | true
+				sh ' docker rm docker_spring_demo ' || true
 				echo " #################### Removed Sprint Boot Docker Container #######################"
 				echo " #################### Starting Sprint Boot Docker Container #######################"
                 sh ' docker run -p 8088:8088 -d --name docker_spring_demo --net=ecosystem -it docker_spring_demo:1.0'
