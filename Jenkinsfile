@@ -31,29 +31,29 @@ pipeline {
         }
         stage ('Build Docker Image'){
             steps{
-				echo "######################### Building Docker Image for JavaWebApp #############################"
+				echo "######################### Building Docker Image for Sprint Boot #############################"
                 sh 'docker build -t docker_spring_demo:1.0 .'
-				echo "######################### Built Docker Image for JavaWebApp Successfully #############################"
+				echo "######################### Built Docker Image for Sprint Boot Successfully #############################"
             }
             
         }
-		stage ('Publish Docker Image') {
+		stage ('Publish Docker Image To Nexus') {
             steps {
                 echo "Publishing Docker Image To Docker Private Registry ( Nexus )"
             }
         }
 		stage ('Deploy Docker Container On Dev Env'){
             steps{
-				echo " #################### Stopping JavaWebApp Container #######################"
-				sh ' docker stop docker_spring_demo '
-				echo " #################### Stopped JavaWebApp Container ########################"
-				echo " #################### Removing JavaWebApp Container #######################"
-				sh ' docker rm docker_spring_demo '
-				echo " #################### Removed JavaWebApp Container #######################"
-				echo " #################### Starting JavaWebApp Container #######################"
+				echo " #################### Stopping Sprint Boot Docker Container #######################"
+				sh ' docker stop docker_spring_demo ' | true
+				echo " #################### Stopped Sprint Boot Docker Container ########################"
+				echo " #################### Removing Sprint Boot Docker Container #######################"
+				sh ' docker rm docker_spring_demo ' | true
+				echo " #################### Removed Sprint Boot Docker Container #######################"
+				echo " #################### Starting Sprint Boot Docker Container #######################"
                 sh ' docker run -p 8088:8088 -d --name docker_spring_demo --net=ecosystem -it docker_spring_demo:1.0'
-				echo " #################### Started JavaWebApp Container #######################"
-				echo " #################### JavaWebApp URL : http://<HOSTNAME>:8088/rest/hellodocker #######################"
+				echo " #################### Started Sprint Boot Docker Container #######################"
+				echo " #################### Sprint Boot URL : http://<HOSTNAME>:8088/rest/hellodocker #######################"
             }
 		}
         
