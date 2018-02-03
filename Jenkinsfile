@@ -40,8 +40,8 @@ pipeline {
 		stage ('Publish Docker Image To Nexus') {
             steps {
                 echo "################ Publishing Docker Image To Docker Private Registry ( Nexus ) #####################"
-				sh 'docker tag docker_spring_demo:1.0 ${DOCKER_PRIVATE_REGISTRY_HOST}:${DOCKER_PRIVATE_REGISTRY_HOST}/docker_spring_demo:1.0'
-				sh 'docker pull ${DOCKER_PRIVATE_REGISTRY_HOST}:${DOCKER_PRIVATE_REGISTRY_HOST}/docker_spring_demo:1.0'
+				sh 'docker tag docker_spring_demo:1.0 ${DOCKER_PRIVATE_REGISTRY_HOST}:${DOCKER_PRIVATE_REGISTRY_PORT}/docker_spring_demo:1.0'
+				sh 'docker pull ${DOCKER_PRIVATE_REGISTRY_HOST}:${DOCKER_PRIVATE_REGISTRY_PORT}/docker_spring_demo:1.0'
 				echo "################ Successfully Published Docker Image To Docker Private Registry ( Nexus ) #####################"
             }
         }
