@@ -37,7 +37,7 @@ pipeline {
             }
             
         }
-		stage ('Publish Docker Image To Nexus') {
+		stage ('Publish Docker Image To Nexus Repo') {
             steps {
                 echo "################ Publishing Docker Image To Docker Private Registry ( Nexus ) #####################"
 				sh 'docker tag docker_spring_demo:1.0 ${DOCKER_PRIVATE_REGISTRY_HOST}:${DOCKER_PRIVATE_REGISTRY_PORT}/docker_spring_demo:1.0'
@@ -46,7 +46,7 @@ pipeline {
 				echo "################ Successfully Published Docker Image To Docker Private Registry ( Nexus ) #####################"
             }
         }
-		stage ('Deploy Docker Container On Dev Env'){
+		stage ('Run Docker Image'){
             steps{
 				echo " #################### Stopping Sprint Boot Docker Container #######################"
 				sh ' docker stop docker_spring_demo || true '
