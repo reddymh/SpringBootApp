@@ -25,7 +25,7 @@ stage ('Checkout') {
         }
         stage ('Sonar'){
             steps{
-                sh 'mvn sonar:sonar -Dsonar.host.url=http://<SONAR_HOST>:<SONAR_PORT> -Dsonar.login=<SONAR_LOGIN_TOKEN>'
+                sh 'mvn sonar:sonar -Dsonar.host.url=http://${SONAR_HOSTNAME}:${SONAR_PORT} -Dsonar.login=${SONAR_LOGIN_TOKEN}'
             }
             
         }
