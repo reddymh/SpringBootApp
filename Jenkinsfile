@@ -25,7 +25,7 @@ stage ('Checkout') {
         }
         stage ('Sonar'){
             steps{
-                sh 'mvn sonar:sonar -Dsonar.host.url=http://sonar:9000 -Dsonar.login=852d6cd2d9ecb6cc743db64527ad8e7c6579bedf'
+                sh 'mvn sonar:sonar -Dsonar.host.url=http://<SONAR_HOST>:<SONAR_PORT> -Dsonar.login=<SONAR_LOGIN_TOKEN>'
             }
             
         }
@@ -37,7 +37,7 @@ stage ('Checkout') {
         }
 		stage ('Publish Artifacts') {
             steps {
-                sh 'mvn clean deploy -DaltDeploymentRepository=nexus-releases::default::http://nexus:8081/repository/totaldevops_release'
+                sh 'mvn clean deploy'
             }
         }
         

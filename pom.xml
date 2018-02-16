@@ -65,6 +65,17 @@
 		</plugins>
 		<finalName>docker-spring-boot-${project.version}</finalName>
 	</build>
-
+<distributionManagement>
+		<repository>
+			 <id>nexus-releases</id>
+			 <name>Demo Release</name>
+			 <url>${td_release_url}</url>
+		</repository>
+		<snapshotRepository>
+			 <id>nexus-releases</id>
+			 <name>Demo Snapshot</name>
+			 <url>${td_snapshot_url}</url>
+		</snapshotRepository>
+	</distributionManagement>
 
 </project>
