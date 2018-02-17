@@ -42,7 +42,7 @@ stage ('Checkout') {
         }
 		stage ('Publish Artifacts') {
             steps {
-                sh 'mvn clean deploy'
+                sh 'mvn deploy'
             }
         }
         
