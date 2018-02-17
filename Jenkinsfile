@@ -36,7 +36,7 @@ stage ('Checkout') {
 				echo "############## Stopped the Spring Boot App Service ####################"
 				echo "############## Starting the Spring Boot App Service ####################"
 				sh 'cp -f target/docker-spring-boot-0.0.1-RELEASE.jar .'
-                sh 'java -jar docker-spring-boot-0.0.1-RELEASE.jar'
+                sh 'JENKINS_NODE_COOKIE=dontKillMe nohup java -jar docker-spring-boot-0.0.1-RELEASE.jar > log.out &'
 				sh 'echo $! > ./pid.txt'
 				echo "############## Started the Spring Boot App Service ####################"
             }
