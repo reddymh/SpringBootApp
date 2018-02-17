@@ -35,7 +35,7 @@ stage ('Checkout') {
 				sh 'kill $(cat ./pid.txt) || true'
 				echo "############## Stopped the Spring Boot App Service ####################"
 				echo "############## Starting the Spring Boot App Service ####################"
-                sh 'java -jar target/docker-spring-boot.jar > log.out & echo $! > ./pid.txt &'
+                sh 'java -jar target/docker-spring-boot-0.0.1-RELEASE.jar > log.out & echo $! > ./pid.txt &'
 				echo "############## Started the Spring Boot App Service ####################"
             }
             
