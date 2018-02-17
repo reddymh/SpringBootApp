@@ -32,10 +32,10 @@ stage ('Checkout') {
         stage ('Deploy To Dev'){
             steps{
 			    echo "############## Stopping the Spring Boot App Service ####################"
-				sh 'kill $(cat ./pid.txt)'
+				sh 'kill $(cat ./pid.txt) || true'
 				echo "############## Stopped the Spring Boot App Service ####################"
 				echo "############## Starting the Spring Boot App Service ####################"
-                sh 'nohup java -jar target/docker-spring-boot.jar > log.out & echo $! > ./pid.txt &'
+                sh 'java -jar target/docker-spring-boot.jar > log.out & echo $! > ./pid.txt &'
 				echo "############## Started the Spring Boot App Service ####################"
             }
             
