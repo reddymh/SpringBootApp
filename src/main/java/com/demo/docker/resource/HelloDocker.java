@@ -12,7 +12,7 @@ public class HelloDocker{
 	@GetMapping
 	public String hellodocker() {
 		
-		return "REST API Call!!!";
+		return "Hello TD via REST API Call!!!";
 	}
 	
 }
